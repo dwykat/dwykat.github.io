@@ -5,4 +5,5 @@ Gemfile.lock
 .bundle/
 log
 *.out
+*.sh
 vendor/
