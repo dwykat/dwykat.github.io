@@ -2,3 +2,7 @@ _site
 .DS_Store
 .sass-cache/
 Gemfile.lock
+.bundle/
+log
+*.out
+vendor/
