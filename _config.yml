@@ -21,9 +21,9 @@ sass:
   style: compressed
 
 # Site Data
-  url: "https://bryceyang.github.io" 
+  url: "https://todebug.com" 
 # the base hostname & protocol for your site, e.g. http://example.com
-baseurl: /
+baseurl: 
 title: V
 description: "V is my learning record."
 keywords: 'jekyll,theme,gem-based,blog'
@@ -49,7 +49,7 @@ author:
       url:
 home:
   section1: <h1>V</h1>
-  section2: <h2>V is my learning record.</h2>
+  section2: <h2>For man is man and master of his fate.</h2>
  #section3: <div class="social-links"><a class="ico-github btn" href="https://github.com/bryceyang/bryceyang.github.io" title="View on GitHub"></a></div>
 blog:
   cc_license:  http://creativecommons.org/licenses/by-sa/4.0/
@@ -57,8 +57,8 @@ blog:
   footer_content: V is my learning record.
 
 disqus:
-  shortname: bryceyang
-  public_key: M1l4mNuPXdbLDtEyyCiWh6LN7HApjJEKtAtLStTeow2EGcPpw5dMpJMKe0sstvDO
+  shortname: todebug
+  public_key: 8ayEhSuQZP6P8nuIUTKmI99NFEOuI6idwr26SUF6lIpwzcxfpZh5zCTb4PSmCWXe
 google_analytics: 'UA-100095499-1'
 addthis_public_id: # AddThis sharing plugin. See http://www.addthis.com/
 
