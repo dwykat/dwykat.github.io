@@ -1,7 +1,7 @@
 ---
 layout: post
-title: "vim tips"
-categories: [vim]
+title: "vim配置"
+categories: [VIM]
 tags: [vim]
 redirect_from:
   - /2017/07/01/

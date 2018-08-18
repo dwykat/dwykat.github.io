@@ -3,7 +3,7 @@ layout: post
 tille: "stack overflow 高票回答之Python中的引用问题"
 description: "stack overflow"
 categories: [Python]
-tags: [Python StackOverflow]
+tags: [python, stackoverflow]
 redirect_from:
   - /2018/03/26/
 ---

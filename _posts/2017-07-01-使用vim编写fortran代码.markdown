@@ -1,8 +1,8 @@
 ---
 layout: post
 title: "使用vim编写fortran代码的一些相关设置"
-categories: [tips]
-tags: [tips]
+categories: [Tips]
+tags: [vim, fortran]
 redirect_from:
   - /2017/07/01/
 

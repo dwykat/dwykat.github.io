@@ -2,7 +2,8 @@
 layout: post
 title: Ubuntu 16.04安装jekyll
 date: 2017-06-26 20:13:00.000000000 +9:00
-tag: Ubuntu 
+catagory: Linux
+tag: ubuntu 
 ---
 
 > 一直以来在github写博客习惯于直接git提交后在github pages看效果，这样来回修改就会繁琐的commit、push,所以还是搭建jekyll本地环境预览吧。

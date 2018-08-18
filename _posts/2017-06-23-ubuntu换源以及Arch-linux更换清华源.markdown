@@ -3,7 +3,7 @@ layout: post
 title: "Ubuntu以及Arch Linux更换清华源"
 description: "换源速记"
 categories: [Linux]
-tags: [Linux]
+tags: [ubuntu, arch]
 redirect_from:
   - /2017/06/23/
 

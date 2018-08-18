@@ -3,7 +3,7 @@ layout: post
 title: "使用nginx和uwsgi部署Django应用"
 description: "部署过程记录"
 categories: [Python]
-tags: [Python, Django]
+tags: [python, django]
 redirect_from:
   - /2018/03/21/
 ---

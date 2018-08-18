@@ -2,7 +2,7 @@
 layout: post
 title: "Leetcode 1. Two Sum, 15. 3Sum, 16. 3Sum Closest解题报告"
 description: "解题报告"
-categories: coding
+categories: Code
 tags: leetcode
 redirect_from:
   - /2017/11/03/

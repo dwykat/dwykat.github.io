@@ -1,8 +1,8 @@
 ---
 layout: post
 title: "Tips about git and jupyter"
-categories: [tips]
-tags: [tips]
+categories: [Tips]
+tags: [git, jupyter, tips]
 redirect_from:
   - /2017/05/25/
 ---

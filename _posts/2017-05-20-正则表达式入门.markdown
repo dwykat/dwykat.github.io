@@ -3,7 +3,7 @@ layout: post
 tille: "正则表达式入门笔记"
 description: "正则表达式速记手册"
 categories: [Linux]
-tags: [Linux]
+tags: [regex]
 redirect_from:
   - /2017/05/17/
 ---

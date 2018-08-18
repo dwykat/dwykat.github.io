@@ -3,7 +3,7 @@ layout: post
 title: "Problems I encountered when I use Arch Linux"
 description: "A summary of nomal Arch linux user's confuseing"
 categories: [Linux]
-tags: [Linux]
+tags: [arch]
 redirect_from:
   - /2017/05/17/
 ---

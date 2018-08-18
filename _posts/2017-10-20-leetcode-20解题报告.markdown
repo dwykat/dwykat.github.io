@@ -2,8 +2,8 @@
 layout: post
 title: "LeetCode 20. Valid Parentheses解题报告"
 description: "A conclusion of my problem-solving method"
-categories: [coding]
-tags: [LeetCode]
+categories: [Code]
+tags: [leetcode]
 redirect_from:
   - /2017/10/20/
 ---

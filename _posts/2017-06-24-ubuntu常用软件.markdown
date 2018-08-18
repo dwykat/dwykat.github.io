@@ -3,7 +3,7 @@ layout: post
 title: "Ubuntu常用软件"
 description: "常用软件收集"
 categories: [Linux]
-tags: [Linux]
+tags: [ubuntu]
 redirect_from:
   - /2017/06/23/
 ---

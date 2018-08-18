@@ -2,8 +2,8 @@
 layout: post
 title: "i3设置多屏显示"
 description: "i3使用tips集锦"
-categories: [Linux, i3wm]
-tags: [Linux, tips, i3wm]
+categories: [Linux]
+tags: [tips, i3wm]
 redirect_from:
   - /2017/05/17
 ---

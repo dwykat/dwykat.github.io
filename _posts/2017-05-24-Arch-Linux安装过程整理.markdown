@@ -2,7 +2,7 @@
 layout: post
 title: Arch linux安装以及后续配置过程整理
 categories: [Linux]
-tags: [Linux]
+tags: [arch]
 redirect_from:
   - /2017/05/24/
 ---
