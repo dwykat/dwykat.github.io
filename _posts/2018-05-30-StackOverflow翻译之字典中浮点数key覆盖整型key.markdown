@@ -6,6 +6,7 @@ categories: Python
 tags: 
     - python 
     - stackoverflow
+    - 翻译
 ---
 ### Why can a floating point dictionary key overwrite an integer key with the same value?
 {: .lead}
