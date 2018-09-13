@@ -1,12 +1,16 @@
 ---
 layout: post
-tille: How the heck does async/await work in Python 3.5? 
-description: Try to understand async/await
+tille: "How the heck does async/await work in Python 3.5 [to be continued]"
+description: "Try to understand async/await"
 categories: Python
-tags: 
-    - python 
-    - 翻译
+tags: [python, 翻译]
+redirect_from:
+  - /2018/08/23/
 ---
+**目录：**
+* Kramdown table of content
+{:toc .toc}
+* * *
 **To be continued.**
 
 **[原文链接](https://snarky.ca/how-the-heck-does-async-await-work-in-python-3-5/)**
@@ -118,7 +122,7 @@ def top():
 # Get the generator.
 gen = top()
 value = next(gen)
-print(value)  # Prints '42'.
+print(value)  # Prints '43'.
 try:
     value = gen.send(value * 2)
 except StopIteration as exc:
@@ -129,7 +133,7 @@ print(value)  # Prints '84'.
 Python2.2中的生成器可以让执行的代码暂停。当Python2.5中引进了回传值到暂停的生成器中的功能，协程的概念在Python中就变得有可能了。然后Python3.3中新加入的yield from让重构生成器以及链接生成器都变得简单了。
 
 
-### 时间循环是什么？
+### 事件循环是什么？
 
 如果你开始关心`async`/`await`，那么理解时间循环是什么以及它们如何让异步编程变得有可能就很重要了。如果你曾经做过GUI编程————包括网页前后端的工作————那么你就已经和时间循环打过交道了。但是鉴于异步编程的概念作为Python一种新的语言结构，你如果暂时不明白时间循环是什么也是可以的。
 
@@ -164,9 +168,85 @@ loop.run_until_complete(asyncio.wait(tasks))
 loop.close()
 ```
 
-在Python3.4中， asyncio.coroutine 装饰器用于将函数标记为充当协程的角色，该程序用于异步和它的事件循环。这为Python提供了它对协程的第一个具体定义：一个对象，它实现了添加到[PEP 342][]中的生成器的方法，并由`collections.abc.coroutine`抽象基类表示。这意味着，突然之间，所有的生成器都实现了协程接口，即使它们并不打算以那种方式使用。为了解决这个问题，异步要求将所有要用作协同程序的生成器都必须用`asyncio.coroutine`修饰。
+在Python3.4中， `asyncio.coroutine` 装饰器用于将函数标记为协程，用于`asyncio`它的事件循环。这为Python提供了它对协程的第一个具体定义：一个对象，它实现了添加到[PEP 342][]中的生成器的方法，并由`collections.abc.coroutine`抽象基类表示。这意味着，突然之间，所有的生成器都实现了协程接口，即使它们并不是被当做协程使用的。为了解决这个问题，`asyncio`要求将所有要用作协程的生成器都必须用`asyncio.coroutine`修饰。
 
-有了这个协程的具体定义（与生成器提供的API相匹配），你就可以在任何[`aysncio.Future`对象][]使用yield from，将这个对象传递到事件循环中，在你等待事情发生的时候暂停协程执行（成为一个future对象是`asyncio`的实现细节，并不重要）。一旦future对象到达了事件循环，它就被监视直到future对象完成任何它需要完成的工作。一旦future完成了自己的工作，事件循环就会注意到，然后暂停等待future结果的协程就会再次启动，然后把它的结果用send()方法传递到协程中。
+有了这个协程的具体定义（与生成器提供的API相匹配），你就可以在任何[`aysncio.Future`对象][]上使用`yield from`，将这个对象传递到事件循环中，在等待事情发生的时候暂停其执行（`future`对象是`asyncio`的实现细节，并不重要）。一旦`future`对象到达了事件循环，它就会被监视, 直到`future`对象完成任何它需要完成的工作。一旦`future`完成了自己的工作，事件循环就会监测到，然后处于暂停状态的等待`future`结果的协程就会再次启动，它的结果也被send()方法传递到协程中。
 
+接着分析上面的那个例子。事件循环启动每一个`countdown()`协程调用，一直执行到其中一个的`yield from`和`asyncio.sleep()`函数处。到这里会产生一个`asyncio.Future`对象，并被传递到事件循环中，然后暂停协程的执行。在事件循环中，事件循环监测这个`future`对象直到sleep的这一秒结束（同时也检查它正在监测的其他事物，比如其他的协程）。一旦这一秒结束了，事件循环找到那个提供`future`对象的处于暂停状态的协程，然后把`future`对象的结果发送到这个协程，然后协程继续运行。这个过程一直持续到所有的`countdown()`协程借宿运行，并且事件循环没有监测对象的时候。稍后，我会给你展示一个完整的协程或者事件循环这些东西工作的例子, 但是首先我想解释一下`async`和`await`是怎么工作的。
+
+#### Python3.5: 从`yield from`到`await`
+在Python3.4中，出于异步编程的目的把一个函数标记为协程的过程想下面这样：
+
+```python
+# 在Python3.5中同样生效
+@asyncio.coroutine
+def py34_coro():
+    yield from stuff()
+```
+
+在Python3.5中，加入了`types.coroutine`装饰器和`asyncio.coroutine`一样用来标记一个生成器为协程。你还可以使用`async def`来语法上定义一个函数为协程，虽然它不能包含任何形式的`yield`表达式；只有`return`和`await`被允许从协程中返回一个值。
+
+```python
+async def py35_coro():
+    await stuff()
+```
+
+`async`和`types.coroutine`做的一个关键的事情就是缩减了协程的定义。它把协程从一个只是接口变成了一种确切的类型，把其他生成器和用来做协程的生成器之间的区别更严格了（`inspect.iscoroutine()`函数更严格了，它固定协程必须使用`async`）。
+
+你可能还注意到了除了`async`，在Python3.5的例子中还引入了`await`表达式（只能在`async def`定义的函数中使用）。虽然`await`运行起来跟`yield from`很像，但是`await`表达式接收的对象确是不同的。协程可以在`await`表达式中使用，因为协程就是所有这些东西的基础。但是当你在一个对象上调用`await`时，这个对象技术上需要是一个`awaitable`对象：一个定义了`__await__()`方法并且返回一个迭代器，而不是返回协程本身的对象。协程被认为是`awaitable`对象（这也是为什么`collections.abc.Coroutine`继承自`collections.abc.Awaitable`）。这个定义遵循了Python底层上把大部分的语法定义都转换到一个方法调用上的传统，就像`a+b`在底层实际上是`a.__add__(b)`或者`b.__radd__(a)`。
+
+那么在底层上`yield from`和`awati`有什么区别呢（也就是一个使用`types.coroutine`装饰器定义的生成器和一个用`async def`定义的生成器的区别）？让我们看一下上面的两个例子在Python3.5中的字节码，来了解一下本质区别。`py34_coro()的字节码是：
+
+```python
+>>> dis.dis(py34_coro)
+  2           0 LOAD_GLOBAL              0 (stuff)
+              3 CALL_FUNCTION            0 (0 positional, 0 keyword pair)
+              6 GET_YIELD_FROM_ITER
+              7 LOAD_CONST               0 (None)
+             10 YIELD_FROM
+             11 POP_TOP
+             12 LOAD_CONST               0 (None)
+             15 RETURN_VALUE
+```
+
+`py35_coro()`的字节码是：
+
+```python
+>>> dis.dis(py35_coro)
+  1           0 LOAD_GLOBAL              0 (stuff)
+              3 CALL_FUNCTION            0 (0 positional, 0 keyword pair)
+              6 GET_AWAITABLE
+              7 LOAD_CONST               0 (None)
+             10 YIELD_FROM
+             11 POP_TOP
+             12 LOAD_CONST               0 (None)
+             15 RETURN_VALUE
+```
+
+忽略那行由于`py34_coro()`拥有`asyncio.coroutine`装饰器造成的区别，两者唯一肉眼可见的区别就是`GET_YIELD_FROM_ITER`字节码和`GET_AWAITABLE`字节码的不同。两个函数都被正确的标记成协程，所以并没有什么区别。在使用`GET_YIELD_FROM_ITER`的情况下，它只是简单的检查一下它的参数是不是一个生成器或者协程，如果不是，它就会对它的参数调用`iter()`方法（只有当`yield from`的字节码在协程里使用的时候，该字节码才能接受一个协程对象，在这个例子中是正确的需要感谢`types.coroutine`装饰器标记了这个生成器就像在C语言层面上用`CO_ITERABLE_COROUTINE` 标记代码对象一样）。
+
+但是，`GET_AWAITABLE`字节码做了一些不同的事情。虽然这个字节码接收一个跟`GET_YIELD_FROM_ITER`接收的一样的协程，但是它不会接收一个没有被标记为协程的生成器。除了协程，这个字节码还像我们前面讨论的那样接收一个`awaitable`对象。这就使得`yield from`表达式和`await`表达式都接收协程对象，同时不同的地方在于它们是否分别接收一个普通的生成器或者`awaitable`对象。
+
+你可能想知道为什么基于`async`的协程和基于生成器的协程在各自的暂停表达式中会接收不同的参数？这样做的原因是Python尽最大的努力确保你不会搞砸了，并且意外的混合和匹配那些恰好拥有相同API的对象。鉴于生成器继承性的实现了协程的API，那么当你希望使用一个协程的时候，就很可能意外的使用了生成器。而且由于并不是所有的生成器都被用编写用在一个基于协程的控制流程中，你需要避免不正确的使用生成器。但是由于Python不是静态编译的，Python能给你的最大保障就是当你使用一个基于生成器的协程的时候执行运行时检查。这意味着当使用`types.coroutine`的时候，Python的编译器分辨不出这个生成器是要被用作协程或者只是用着生成器（记住，语法上写`types.coroutine'并不意味着有人已经提前做了`types = spam`的检查），因此，不同的操作码有不同的限制是由编译器根据它当时的情景给出的。
+
+关于基于生成器的协同程序和基于`async`的协程之间的区别，我想说的一个非常关键的一点是，只有基于生成器的协程才能真正暂停执行并且强制传递一些东西到时间循环。你通常不会注意到这一重要的细节，因为你通常会调用事件循环特定的函数，比如`asyncio.sleep()`由于事件循环实现了它们自己的API，这些函数都必须考虑这个小细节。对于大多数的我们，我们会使用事件循环而不是编写它们，因此我们只编写`aync`协程而不需要真正的关心这个问题。但是如果你和我一样，并且正在好奇为什么你不能编写一些像`asyncio.sleep()`这种只使用`async`协程的函数，那么这将是一个非常好的时刻。
+
+#### 总结
+让我们简单总结一下上面的东西。使用`async def`定义一个方法使得这个函数成为协程。另一个制作协程的方式是用`types.coroutine`标记一个生成器——实际上这个标记其实是对代码对象做`CO_ITERABLE_COROUTINE`标记——或者是一个`collections.abc.Coroutine`的子类。你只能使用一个基于生成器的协程的时候才能暂停一个协程调用链。
+
+一个`awaitable`对象要么是一个协程，要么是一个定义了`__await__()`的对象——实际上是`collections.abc.Awaitable`——它返回一个迭代器而不是协程。一个`await表达式基本上就是`yield from`，但是有只能和`awaitable`对象一起使用（纯粹的生成器不能再`await`表达式中使用）。一个`async`函数是一个协程，它要么含有`return`语句——包括Python中每一个函数末尾都有的隐式`return None`语句——要么还包括或者只有`await`表达式（`yield`表达式是不允许使用的）。这个对于`async`函数的限制是为了确保你不会意外的将基于生成器的协程和其他生成器混用，毕竟这两种类型的生成器的期望使用方式是相当不同的。
+
+### 把`async`/`await`当做异步编程的一个API
+我想指出的一个关键事情是直到我看了David Beazley's Python Brasil 2015年的幻灯片之前都没有深入思考过的事情。在那个讲座里，David指出了`async/await`实际上是异步编程的一个API（这也是他在twitter上对我重申的）。David说这个的意思是人们不应该把`async`/`await`当成和`asyncio`一样的东西，而是把`asyncio`想象成一个替异步编程实现`async`/`await`API的框架。
+
+David相信`async`/`await`是一个异步编程的API以至于他创建了`curio`项目去实现他自己的事件循环。这让我更清楚的认识到，`async`/`await`允许Python为异步编程提供基础，但是并不将你绑定到特定的事件循环或者其他的底层细节当中（这与直接将事件循环集成到语言中的其他编程语言不通）。这使得`curio`这样的项目，不仅能够在较低的级别上以不同的方式运行（例如，`aasyncio`使用`future`对象来作为和事件循环交流的API，而`curio`使用元组），而且还可以具有不同的关注点和性能特种（例如，`asyncio`有一个完整的框架来实现传输和协议层，这使得它具有扩展性，而`curio`更简单，并且希望用户自己关心这类问题，但是也让它运行的更快了）。
+
+基于Python中（短））的异步编程历史，人们可能认为`async`/`await` == `asyncio`就是可以理解的。我是说`asyncio`是使得在Python3.4中异步编程变得可能以及在Python3.5中添加`async`/`await`的动力因素。但是`async`/`await`的设计目的是要足够灵活到不再需要`asyncio`或者针对该框架扭曲任何关键决策。换句话说，`async`/`await`延续了Python的传统，即设计东西时尽可能灵活，同时又能实用的使用（和实现）。
+
+## 一个例子
+
+到了现在你脑子里可能充斥着各种名词和概念，使得明白所有这些东西时如何使用来给你提供异步编程变得有些困难。为了使得这些都更确切，这是一个完整的（如果设计的）异步编程例子，从事件循环和相关函数到用户代码的端到端示例。这个例子有代表独立火箭发射倒计时的协程，但是看起来确是同步倒计时的。这就是通过并发的异步编程；三个独立的协程会独立运行，而且这一切都在一个线程中完成。
+**To be continued.**
 
 [Wikipedia]: https://www.wikipedia.org/ "Wikipedia"
+
