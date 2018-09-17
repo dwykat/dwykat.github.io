@@ -1,16 +1,12 @@
 ---
 layout: post
-tille: "How the heck does async/await work in Python 3.5 [to be continued]"
-description: "Try to understand async/await"
+tille: How the heck does async/await work in Python 3.5? 
+description: Try to understand async/await
 categories: Python
-tags: [python, 翻译]
-redirect_from:
-  - /2018/08/23/
+tags: 
+    - python 
+    - 翻译
 ---
-**目录：**
-* Kramdown table of content
-{:toc .toc}
-* * *
 **To be continued.**
 
 **[原文链接](https://snarky.ca/how-the-heck-does-async-await-work-in-python-3-5/)**
@@ -246,6 +242,117 @@ David相信`async`/`await`是一个异步编程的API以至于他创建了`curio
 ## 一个例子
 
 到了现在你脑子里可能充斥着各种名词和概念，使得明白所有这些东西时如何使用来给你提供异步编程变得有些困难。为了使得这些都更确切，这是一个完整的（如果设计的）异步编程例子，从事件循环和相关函数到用户代码的端到端示例。这个例子有代表独立火箭发射倒计时的协程，但是看起来确是同步倒计时的。这就是通过并发的异步编程；三个独立的协程会独立运行，而且这一切都在一个线程中完成。
+
+```python
+# -*- coding: utf-8 -*-
+"""
+一个完整的异步编程的例子
+"""
+import datetime
+import heapq
+import types
+import time
+
+
+class Task:
+    """代表一个协程在重新运行之前应该等待多久
+
+    实现的比较运算符是给heapq用的。不幸的是，由于当datetime.datetime实例相等的时候，比较就会传到协程，而协程没有实现比较方法，两个元素的元组就不能用。
+    把这个当成asyncio.Task/curio.Task.
+    """
+
+    def __init__(self, wait_until, coro):
+        self.coro = coro
+        self.waiting_until = wait_until
+
+    def __eq__(self, other):
+        return self.waiting_until == other.waiting_until
+
+    def __lt__(self, other):
+        return self.waiting_until < other.waiting_until
+
+
+class SleepingLoop:
+    """着重于延迟协程执行的事件循环
+
+    把这个想象成`asyncio.BaseEventLoop/curio.Kernel`。
+    """
+
+    def __init__(self, *coros):
+        self._new = coros
+        self._waiting = []
+
+    def run_unitl_complete(self):
+        # 启动所有协程
+        for coro in self._new:
+            wait_for = coro.send(None)
+            heapq.heappush(self._waiting, Task(wait_for, coro))
+
+        # 一直运行到没有任务
+        while self._waiting:
+            now = datetime.datetime.now()
+            # 获取具有最近恢复时间的协程
+            task = heapq.heappop(self._waiting)
+            if now < task.waiting_until:
+                # 我们比计算超前，等待直到下次运行时间
+                delta = task.waiting_until - now
+                time.sleep(delta.total_seconds())
+                now = datetime.datetime.now()
+            try:
+                # 唤醒协程
+                wait_until = task.coro.send(now)
+                heapq.heappush(self._waiting, Task(wait_until, task.coro))
+            except StopIteration:
+                # 协程结束
+                pass
+
+
+@types.coroutine
+def sleep(seconds):
+    """暂停一个协程指定的秒数
+
+    把这个当成`asyncio.sleep()/curio.sleep()`
+    """
+
+    now = datetime.datetime.now()
+    wait_until = now + datetime.timedelta(seconds=seconds)
+    # 将所有调用栈的协程暂停；`yield`的使用使得这个函数成为一个基于生成器的而不是基于`async`的协程
+    actual = yield wait_until
+    # 唤醒执行函数栈，返回我们实际上等待了多久
+    return actual - now
+
+
+async def countdown(label, length, *, delay=0):
+    """ length秒的发射倒计时，等待delay秒数
+
+    这是一个用户的普通写法。
+    """
+
+    print(label, 'waiting', delay, 'seconds before starting countdown')
+    delta = await sleep(delay)
+    print(label, 'starting after waiting', delta)
+    while length:
+        print(label, 'T-minus', length)
+        waited = await sleep(1)
+        length -= 1
+    print(label, 'lift-off!')
+
+
+def main():
+    """启动事件循环，倒数三个独立的发射
+
+    这就是一个用户会编写的经典代码。
+    """
+    loop = SleepingLoop(countdown('A', 5), countdown(
+        'B', 3, delay=2), countdown('C', 4, delay=1))
+    start = datetime.datetime.now()
+    loop.run_unitl_complete()
+    print('Total elapsed time is', datetime.datetime.now() - start)
+
+
+if __name__ == '__main__':
+    main()
+```
 **To be continued.**
 
 [Wikipedia]: https://www.wikipedia.org/ "Wikipedia"
