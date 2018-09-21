@@ -27,7 +27,7 @@ uWSGI is a WSGI implementation.
 
 部署过程看了很多个教程，也翻看了不少Nginx和uwsgi的文档，但是坑永远都在，当你踩完之后它才会消失，所以记录下自己这次部署的记录，以便以后参考。
 
-### 1. 安装nginx
+### 1. 安装nginx {#install-nginx}
 > 本次使用的是腾讯云的服务器，系统为Centos7，这里有一篇写的很好的文档：[centos7安装nginx](https://www.digitalocean.com/community/tutorials/how-to-install-nginx-on-centos-7), 当然，为了省去跳转的功夫，这里将过程记录如下：
 
 ```shell
@@ -45,11 +45,11 @@ sudo nginx -s reload
 # 2. stop
 sudo nginx -s stop
 ```
-### 2. 安装mariadb
+### 2. 安装mariadb {#install-mariadb}
 ```shell
 sudo yum install mariadb-server
 ```
-#### 2.1 在安装mariadb之后，首先修改mariadb的一些设置，使其支持中文：
+#### 2.1 在安装mariadb之后，首先修改mariadb的一些设置，使其支持中文： {#change-mariadb-setting}
 ```shell
 # yum安装的mariadb主配置文件在/etc/my.cnf， 并且在这个文件中包含/etc/my.cnf.d路径下的所有文件。
 # 1. 编辑该目录下的client.cnf文件，在[client]下添加：
@@ -63,7 +63,7 @@ character-set-server=utf8
 collation-server=utf8_general_ci
 skip-character-set-client-handshake
 ```
-#### 2.2 配置数据库远程访问：
+#### 2.2 配置数据库远程访问： {#remote-access}
 ```shell
 # 1. 设置bind ip
 vim /etc/my.cnf
@@ -88,13 +88,13 @@ firewall-cmd --reload
 ```
 **到目前为止，数据库已经支持中文显示，并且已经可以远程访问，数据库模块设置结束。 **
 
-### 3. 安装uwsgi
+### 3. 安装uwsgi {#install-uwsgi}
 ```shell
 pip install uwsgi
 ```
 
-### 4. 开始配置
-#### 4.1 测试uwsgi与Django链
+### 4. 开始配置 {#config}
+#### 4.1 测试uwsgi与Django链 {#test-conneciton}
 1. 首先确认你的Django项目在`python manage.py runserver 0.0.0.0:8000`时运行完全良好。（同时确认你的云服务器8000端口是开启的）
 2. 如果1通过，那么就可以使用uwsgi试一下了：
 ```shell
@@ -103,7 +103,7 @@ uwsgi --http :8000 --module mysite.wsgi
 其中，mysite是你的Django项目名称，wsgi为你Django默认生成的主app文件夹下的wsgi.py文件。
 如果项目仍然能正常运行，那么说明uwsgi与Django链是完好的。
 
-#### 4.2 配置nginx
+#### 4.2 配置nginx {#nginx-config}
 1. 你可以在你的项目下新建一个conf文件夹，用来存放Nginx以及uwsgi的配置文件，假设Nginx配置文件为`mysite_nginx.conf`
 
 ```shell

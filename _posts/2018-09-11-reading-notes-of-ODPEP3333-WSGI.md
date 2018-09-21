@@ -12,16 +12,16 @@ redirect_from:
 {:toc .toc}
 * * *
 
-# PEP 3333 -- Python Web Server Gateway Interface 阅读笔记
-## 前言
+# PEP 3333 -- Python Web Server Gateway Interface 阅读笔记 {#title}
+## 前言 {#preface-for-readers}
 PEP 3333 是PEP 333的更新，对于原来和PEP 333兼容的应用和服务器，它们和PEP 3333仍然是兼容的。
 
 对于Python3来说，编写应用或者服务器必须要遵循下面两个标题命名的版块里提到的规则：`A Note On String Types`,和`Unicode Issues`。
 
-## 摘要
+## 摘要 {#abstract}
 如果有人问你WSGI是啥，就可以参考下面这句话回答他了：“This document specifies a proposed standard interface between web servers and Python web applications or frameworks, to promote web application protability across a variety of web servers. ”
 
-## 出发点和目标（Original Rationale and Goals）
+## 出发点和目标（Original Rationale and Goals） {#original-rationale}
 **出发点：** <br>
 Python目前有很多web应用程序框架，众多的选择给Python新用户带来一个问题：在选择web框架的同时，也限制了他们对于可用的web服务器的选择，反过来也是一样。
 
@@ -41,7 +41,7 @@ Python目前有很多web应用程序框架，众多的选择给Python新用户�
 
 3.&emsp;最后应该提到，目前版本的WSGI没有对部署应用规定任何特殊机制。
 
-## 规范综述（Specification Overview）
+## 规范综述（Specification Overview）{#specification}
 WSGI接口包括两端：服务器或者网关端，和应用或者框架端。服务器端调用一个由应用端提供的可调用对象。
 
 下面这两段话有点儿迷糊，先记录原话和当前理解：
@@ -54,7 +54,7 @@ WSGI接口包括两端：服务器或者网关端，和应用或者框架端。�
 
 一个`callable`可以指一个函数，一个方法，一个类或者一个定义了`__call__`方法的实例。由实现`the callable`的服务器、网关或者应用程序根据它们的需要选择适当的实现技术。另一方面，调用`callable`的服务器、网关或应用程序禁止依赖提供给它的`callable`的类型。也就是说，`callbles`只是用来被调用的，而不是被内省（获取它们的类型）。
 
-### 一个字符串类型需要注意的地方（A Note On String Types）
+### 一个字符串类型需要注意的地方（A Note On String Types） {#string-types}
 
 通常，HTTP处理的是字节，这就意味着这个规范主要就是关于如何处理字节。
 
@@ -68,7 +68,7 @@ WSGI接口包括两端：服务器或者网关端，和应用或者框架端。�
 
 但是不要搞混了：即使Python的`str`类型底层实际上`Unicode`，`native strings`的内容也必须能够通过`Latin-1`编码转换到字节。（细节参见下面的`Unicode Issues`章节）。
 
-## 应用/框架端
+## 应用/框架端 {#client-framework}
 应用程序对象（`application object`）只是一个接受两个 参数的可调用对象。术语`object`不应该被误解为需要一个实际的对象实例：函数、方法、类或带有`__calll__`方法的实例都可以作为应用程序对象使用。应用程序对象必须能够被多次调用，因为几乎所有的服务器/网管（CGI除外）都会发出重复请求。
 
 （注意：虽然我们把它叫做应用程序对象，但这不应该被解释为应用程序开发者会使用WSGI作为web编程的API。WSGI是一个面向框架和服务器开发者的工具，而没有直接支持应用程序开发者的倾向。）
@@ -111,7 +111,7 @@ class AppClass:
         yield HELLO_WORLD
 ```
 
-## 服务器/网关端
+## 服务器/网关端 {#server-gateway}
 服务器或者网关为每一个从HTTP接收到的请求调用一次请求调用一次该请求对应的可调用应用程序。下面是一个简单的CGI网关，一个接收应用程序对象的函数。
 
 ```python
@@ -191,8 +191,8 @@ def run_with_cgi(application):
         if hasattr(result, 'close'):
             result.close()
 ```
-
-## 中间件：左右逢源的组件（Middleware: Components that Play Both Sides）
+ 
+## 中间件：左右逢源的组件（Middleware: Components that Play Both Sides） {#middleware}
 
 要注意的是，一个对象对于一些应用可能发挥服务器的作用，对于一些服务器，又可能表现得像应用。这种中间件组件能够执行以下功能：
 * 根据目标URL，重写了对应`environ`之后，将一个请求路由到不同的应用程序对象

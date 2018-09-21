@@ -13,7 +13,7 @@ redirect_from:
 
 * * * 
 
-# LeetCode 71: Simplify Path
+# LeetCode 71: Simplify Path {#leetcode71}
 **如果程序有一些情况需要回退，那么优先就考虑一下能不能使用栈。**
 
 ```python
@@ -73,7 +73,7 @@ class Solution:
 
 ```
 
-# LeetCode 53: maximum subarray 
+# LeetCode 53: maximum subarray  {#leetcode53}
 **典型动归**
 
 ```python
@@ -125,7 +125,7 @@ class Solution:
         return max_res
 ```
 
-# LeetCode 28: Implement strStr()
+# LeetCode 28: Implement strStr() {#leetcode28}
 **KMP算法**
 ![KMP](http://oq782gkz3.bkt.clouddn.com/kmp.JPG)
 

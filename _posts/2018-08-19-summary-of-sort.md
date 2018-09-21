@@ -10,8 +10,8 @@ redirect_from:
 * Kramdown table of contents
 {:toc .toc}
 
-## 排序总结：
-### 对数器：
+## 排序总结： {#title}
+### 对数器： {#sort-1}
 > 对数器用来检测自定义排序算法是否正确。以下排序算法都经过10万个随机数组测试。
 
 ```python
@@ -32,7 +32,7 @@ class Comparator():
         return arr1 == arr2
 ```
 
-### 1. 堆排序
+### 1. 堆排序 {#heap-sort}
 **下面这个堆排序写复杂了！！！！，堆还有一个性质是可以利用的：当用数组表示存储n个元素的堆时，叶节点下标分别是[n//2, n//2+1, ..., n-1]，这样的话我们构建堆的时候只要自下往上对不是叶节点的坐标执行heapify操作就可以了。**
 
 > 堆是一个极其重要的数据结构，堆排序主要是利用了堆的思想,其时间复杂度为`O(N*logN)`,额外空间复杂度为`O(1)`。<br>
@@ -42,7 +42,7 @@ class Comparator():
 &emsp;&emsp;&emsp;&emsp;在堆顶与数组中最后一个元素交换后，我们需要重新调整堆，使得堆顶最大；<br>
 &emsp;&emsp;3.重复2，直到可执行区间为1
 
-#### 代码：
+#### 代码： {#heap-sort-code}
 ```python
 class HeapSort():
 
@@ -162,10 +162,10 @@ if __name__ == "__main__":
 
 ```
 
-### 2. 快排
+### 2. 快排 {#quick-sort}
 > 随机快排就是随机+partition的过程。partition过程其实就是荷兰国旗问题。
 
-#### 代码：
+#### 代码： {#quick-sort-code}
 ```python
 import random
 
@@ -205,9 +205,10 @@ class QuickSort():
         arr[i], arr[j] = arr[j], arr[i]
 ```
 
-### 3. 归并
+### 3. 归并 {#merge-sort}
 
-#### 代码
+
+#### 代码 {#merge-sort-code}
 ```python
 import time
 

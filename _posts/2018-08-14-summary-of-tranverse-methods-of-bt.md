@@ -1,19 +1,16 @@
 ---
 layout: post
-tille: 二叉树遍历方式总结：递归、非递归、morris
-description: 二叉树遍历方式总结
+tille: "二叉树遍历方式总结"
+description: "二叉树遍历方式总结"
 categories: [Code]
-tags:
-    - python
-    - code
-    - binary tree
+tags: [python, code, binary tree]
 ---
 * Kramdown table of contents
 {:toc .toc}
 
-# **二叉树遍历方式总结：递归、非递归、morris**
+# **二叉树遍历方式总结：递归、非递归、morris** {#title}
 
-## **二叉树节点定义：**
+## **二叉树节点定义：** {#bt-definition}
 
 ```python
 # _*_ coding: utf-8 _*_
@@ -24,7 +21,7 @@ class Node():
         self.right = None
 ```
 
-## **morris遍历的普遍过程：**
+## **morris遍历的普遍过程：** {#morris-process}
 
 > 遍历到节点cur的时候：
 * 如果cur节点没有左子树，cur指向cur的右孩子；
@@ -32,7 +29,7 @@ class Node():
     1. 如果左子树的最右节点的右孩子是指向空的（第一次到达cur节点），那么将这个最右节点的右孩子设置为cur节点，然后cur指向cur的左孩子；
     2. 如果左子树的最右节点的右孩子是指向cur节点的（第二次到达cur节点），那么将这个最右节点的右孩子还原为空，然后cur指向cur的右孩子；
     
-### **代码：**
+### **代码：** {#morris-code}
 
 ```python
 class MorrisTraverse():
@@ -61,8 +58,8 @@ class MorrisTraverse():
             cur = cur.right
 
 ```
-## **遍历方法集合类**
-### **递归实现前中后序遍历：**
+## **遍历方法集合类** {#class}
+### **递归实现前中后序遍历：** {#recursive-tranverse}
 ```python
 class Traverse():
     """二叉树遍历方法类"""
@@ -95,8 +92,8 @@ class Traverse():
         print(root.val, end=' ')
 ```
 
-### **非递归实现前中后序遍历：**
-#### **前序：**
+### **非递归实现前中后序遍历：** {#normal-tranverse}
+#### **前序：** {#pre-order}
 > 前序非递归也是最简单的，因为第一次就打印所以只需要按序遍历就好了。过程可总结如下：
 * 压栈过程：首先压入根节点, 对于`pop`出的节点，如果有左孩子就入栈，如果有右孩子也入栈；；
 * 出栈过程：`pop`一个节点，然后执行压栈过程；
@@ -119,7 +116,7 @@ class Traverse():
                 stack.append(node.left)
         print('')
 ```
-#### **中序：**
+#### **中序：** {#min-order}
 > 中序非递归，因为中序是第二次访问到该节点的时候才打印，所以过程可以总结如下：
 * 压栈过程：第一次访问到该节点压栈，然后再去找该节点的左孩子压栈；
 * 出栈过程：当前无节点可压栈（已经到了最左的叶子节点), `pop`一个节点并打印，如果`pop`的节点有右孩子，那么重复压栈过程。
@@ -144,7 +141,7 @@ class Traverse():
         print('')
 ```
 
-#### **后序：**
+#### **后序：** {#post-order}
 > 后序非递归有两种经典方法：
 1. 使用两个栈：
     由于我们知道前序遍历顺序是中左右，所以如果我们改写前序成中右左，然后把前序序列压栈，再弹出的顺序就是左右中，也就是后序遍历；
@@ -297,10 +294,10 @@ if __name__ == "__main__":
         ex.post_traversal_1(root)
         ex.post_traversal_2(root)
 ```
-### **借用morris遍历实现前中后序遍历**
+### **借用morris遍历实现前中后序遍历** {#morris-tranverse}
 > morris序中，如果一个节点有左子树，那么这个节点会访问两次，如果一个节点没有左子树，那么这个节点只会访问到一次；
 
-#### **前序：**
+#### **前序：** {#morris-pre}
 > 借用morris序，在第一次访问该节点的时候就打印，就是前序序列；
 
 ```python
@@ -331,7 +328,7 @@ if __name__ == "__main__":
         print('')
 ```
 
-#### **中序：** 
+#### **中序：**  {#morris-min}
 > 借用morris序，如果一个节点有左子树，第二次访问到时打印，如果一个节点没有左子树，那么第一次访问到时就打印。
 
 ```python
@@ -358,7 +355,7 @@ if __name__ == "__main__":
         print(' ')
 ```
 
-#### **后序：** 
+#### **后序：**  {#morris-post}
 > morris序最多只能到达一个节点两次，而后序遍历是第三次访问到一个节点时才打印，所以需要借助于一点儿小技巧。
 
 ```python
@@ -405,7 +402,7 @@ if __name__ == "__main__":
         return pre
 ```
 
-### **测试前中后序遍历正确性**
+### **测试前中后序遍历正确性** {#code-test}
 
 ```python
 def main():
@@ -455,7 +452,7 @@ if __name__ == '__main__':
     main()
 ```
 
-### **层次遍历：**
+### **层次遍历：** {#level-tranverse}
 
 ```python
 def level_trans(root):
