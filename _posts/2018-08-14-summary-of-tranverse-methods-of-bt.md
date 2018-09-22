@@ -1,14 +1,19 @@
 ---
 layout: post
-tille: "二叉树遍历方式总结"
-description: "二叉树遍历方式总结"
-categories: [Code]
-tags: [python, code, binary tree]
+title: "二叉树遍历方式总结：递归，非递归，morris，层序"
+description: "二叉树遍历方式总结：递归，非递归，morris，层序"
+categories: [Python, Code]
+tags: [code, python, binary tree]
+redirect_from:
+  - /2018/08/14/
 ---
+**目录：**
 * Kramdown table of contents
 {:toc .toc}
+- - - 
 
-# **二叉树遍历方式总结：递归、非递归、morris** {#title}
+# **二叉树遍历方式总结：递归、非递归、morris、层次** {#title}
+
 
 ## **二叉树节点定义：** {#bt-definition}
 
@@ -16,7 +21,7 @@ tags: [python, code, binary tree]
 # _*_ coding: utf-8 _*_
 class Node():
     def __init__(self, val):
-        self.val = val
+        self.val oo= val
         self.left = None
         self.right = None
 ```

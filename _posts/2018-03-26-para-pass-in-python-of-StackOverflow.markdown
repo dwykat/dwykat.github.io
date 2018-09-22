@@ -1,9 +1,9 @@
 ---
 layout: post
-tille: "stack overflow 高票回答之Python中的引用问题"
-description: "stack overflow"
+title: "StackOverflow翻译之Python中的参数引用问题"
+description: "stack overflow 高票回答之Python中的引用问题"
 categories: [Python]
-tags: [python, stackoverflow, 翻译]
+tags: [stackoverflow, python, 翻译]
 redirect_from:
   - /2018/03/26/
 ---

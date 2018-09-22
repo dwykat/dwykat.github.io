@@ -13,7 +13,7 @@ redirect_from:
 
 * * * 
 
-# LeetCode 71: Simplify Path {#leetcode71}
+# LeetCode 71: Simplify Path 
 **如果程序有一些情况需要回退，那么优先就考虑一下能不能使用栈。**
 
 ```python
@@ -73,7 +73,7 @@ class Solution:
 
 ```
 
-# LeetCode 53: maximum subarray  {#leetcode53}
+# LeetCode 53: maximum subarray 
 **典型动归**
 
 ```python
@@ -125,7 +125,7 @@ class Solution:
         return max_res
 ```
 
-# LeetCode 28: Implement strStr() {#leetcode28}
+# LeetCode 28: Implement strStr()
 **KMP算法**
 ![KMP](http://oq782gkz3.bkt.clouddn.com/kmp.JPG)
 
@@ -214,7 +214,60 @@ class Solution:
                 cur = next_arr[cur]
             else:
                 next_arr[i] = 0
+                i += 1 
 
         return next_arr
 
+```
+
+**刚刚随手写kmp的时候发现，上面代码`get_next_arr`函数while循环里最后一个else分支里少些了`i += 1`，这样竟然也通过了leetcode的提交。醉了。顺便还试验了下，本来在`strStr`函数里，我是可以直接把needle的长度传给`get_next_arr`函数的，但后来发现，这样的话运行时间反而会加长。。只能说函数多传一个参数比在函数里多建一个变量用时更长啊。**
+
+# LeetCode 7: Reverse Integer
+
+
+```python
+#
+# [7] Reverse Integer
+#
+# https://leetcode.com/problems/reverse-integer/description/
+#
+# algorithms
+# Easy (24.43%)
+# Total Accepted:    480.9K
+# Total Submissions: 2M
+# Testcase Example:  '123'
+#
+# Given a 32-bit signed integer, reverse digits of an integer.
+# 
+# Example 1:
+# Input: 123
+# Output: 321
+# 
+# Example 2:
+# Input: -123
+# Output: -321
+# 
+# Example 3:
+# Input: 120
+# Output: 21
+# 
+# Note:
+# Assume we are dealing with an environment which could only store integers
+# within the 32-bit signed integer range: [−231,  231 − 1]. For the purpose of
+# this problem, assume that your function returns 0 when the reversed integer
+# overflows.
+ 
+
+class Solution:
+    def reverse(self, x):
+        """
+        :type x: int
+        :rtype: int
+        """
+        ans = str(x)[::-1] if x >= 0 else '-' + str(x)[:0:-1]
+        ans = int(ans)
+        if ans < - 2 ** 31 or ans > 2 ** 31 - 1:
+            ans = 0
+
+        return ans
 ```

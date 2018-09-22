@@ -1,13 +1,13 @@
 ---
 layout: post
-tille: stack overflow翻译之字典中浮点数key覆盖整型key 
-description: stack overflow
-categories: Python
-tags: 
-    - python 
-    - stackoverflow
-    - 翻译
+title: "StackOverflow翻译之浮点数键值覆盖整型键值"
+description: "StackOverflow翻译之浮点数键值覆盖整型键值"
+categories: [Python]
+tags: [stackoverflow, python]
+redirect_from:
+  - /2018/05/30/
 ---
+
 ### Why can a floating point dictionary key overwrite an integer key with the same value?
 {: .lead}
 **问题:**
@@ -28,7 +28,6 @@ for k in confusion:
 print sum
 ```
 代码输出结果为`6`，因为键`1.0`把`1`替换了。这让我觉得有些意外，这是一个有用的语言特性吗？
-
 
 **Bakuriu的高票回答（76votes）**
 
