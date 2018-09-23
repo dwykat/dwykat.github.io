@@ -41,7 +41,7 @@ Python目前有很多web应用程序框架，众多的选择给Python新用户�
 
 3.&emsp;最后应该提到，目前版本的WSGI没有对部署应用规定任何特殊机制。
 
-## 规范综述（Specification Overview）{#specification}
+## 规范综述（Specification Overview） {#specification}
 WSGI接口包括两端：服务器或者网关端，和应用或者框架端。服务器端调用一个由应用端提供的可调用对象。
 
 下面这两段话有点儿迷糊，先记录原话和当前理解：
