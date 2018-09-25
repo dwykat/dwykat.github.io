@@ -74,7 +74,7 @@ class Solution:
 ```
 
 # LeetCode 53: maximum subarray 
-**典型动归**
+*****典型动规**
 
 ```python
 #
@@ -355,7 +355,7 @@ class Solution:
 
 # LeetCode 21: Merge Two Sorted Lists
 
-*****能用if else区分情况就不要用两个if，会慢。**
+**能用`if else`区分情况就不要用两个`if`，会慢。**
 
 ```python
 #
@@ -519,5 +519,153 @@ class Solution:
 
 ```
 
+# LeetCode 300: Longest Increasing Subsequence
 
+**1. 第一种最普遍解法，每次往前遍历所有已知`lis`数组元素，来更新`lis[i]`，时间复杂度`O(N**2)`。**
 
+```python
+#
+# [300] Longest Increasing Subsequence
+#
+# https://leetcode.com/problems/longest-increasing-subsequence/description/
+#
+# algorithms
+# Medium (39.22%)
+# Total Accepted:    154.8K
+# Total Submissions: 394.3K
+# Testcase Example:  '[10,9,2,5,3,7,101,18]'
+#
+# Given an unsorted array of integers, find the length of longest increasing
+# subsequence.
+# 
+# Example:
+# 
+# 
+# Input: [10,9,2,5,3,7,101,18]
+# Output: 4 
+# Explanation: The longest increasing subsequence is [2,3,7,101], therefore the
+# length is 4. 
+# 
+# Note: 
+# 
+# 
+# There may be more than one LIS combination, it is only necessary for you to
+# return the length.
+# Your algorithm should run in O(n2) complexity.
+# 
+# 
+# Follow up: Could you improve it to O(n log n) time complexity?
+# 
+#
+class Solution:
+    def lengthOfLIS(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        length = len(nums)
+        if length < 2:
+            return length
+        
+        res = [1 for i in range(length)]
+        i = 1
+        while i < length:
+            temp = nums[i]
+            res[i] = 1
+            for j in range(i-1, -1, -1):
+                if temp > nums[j]:
+                    res[i] = max(res[i], res[j]+1)
+            i += 1
+
+        return max(res)
+
+```
+
+**2. 一种新思路的解法， 跟解法一比较除了使用`lis`数组来保存以对应位置元素结尾的最长递增序列的长度之外，额外添加了一个`max_v`数组，对应数组元素`max_v[i]`代表`i`长度的递增子序列里的最大值的最小值；有了这个数组之后，我们就可以从当前已知最长的递增子序列长度`cur_max`开始递减匹配（递减匹配过程中，用`j`作中间变量），那么如果当前元素`nums[i]`大于`max_v[j]`，那么`i`位置最长的递增子序列长度`lis[i]=j+1`，同时我们要根据`lis[i]`的值来决定更不更新`cur_max`；同时也要根据`num[i]`是否小于`max_v[j+1]`来确定更不更新最长递增子序列长度为`j+1`的那些递增子序列的最大值，此算法时间复杂度`O(n**2)`。**
+
+```python
+class Solution:
+    def lengthOfLIS(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        length = len(nums)
+        if length < 2:
+            return length
+        
+        max_v = [0 for i in range(length+1)]
+
+        max_v[0] = min(nums) - 1
+        max_v[1] = nums[0]
+        lis = [1 for i in range(length)]
+
+        cur_max = 1
+        for i in range(1, length):
+            for j in range(cur_max, -1, -1):
+                if nums[i] > max_v[j]:
+                    lis[i] = j + 1
+                    break
+            # 如果更新了当前最大值，那么更新max_v
+            if lis[i] > cur_max:
+                cur_max = lis[i]
+                max_v[cur_max] = nums[i]
+            # 如果没有更新最大值，那么找到可能被i更新的j
+            # 当nums[i] > max_v[j]也就是进入到了上面for循环中的if条件中
+            # 如果进入了条件中，那么如果nums[i]比原来max_v[j+1]小的时候才有
+            # 更新价值；
+            elif nums[i] > max_v[j] and nums[i] < max_v[j+1]:
+                max_v[j+1] = nums[i]
+        
+        return cur_max
+```
+
+********3. 上面的顺序匹配过程还可以改成二分，因为如果`i>j`, 那么一定有`max_v[i] > max_v[j]`，此算法时间复杂度`O(n*logn)`。**
+
+```python
+class Solution:
+    def lengthOfLIS(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        length = len(nums)
+        if length < 2:
+            return length
+        
+        max_v = [0 for i in range(length+1)]
+
+        max_v[0] = min(nums) - 1
+        max_v[1] = nums[0]
+        lis = [1 for i in range(length)]
+
+        cur_max = 1
+        for i in range(1, length):
+            index = self.get_index(max_v[:cur_max+1], nums[i])
+            if index >= 0:
+                max_v[index+1] = nums[i]
+                cur_max = max(cur_max, index+1)
+                
+        return cur_max
+
+    def get_index(self, max_v, num):
+        length = len(max_v)
+
+        if num > max_v[-1]:
+            return length - 1
+        if num < max_v[0]:
+            return -1
+
+        low = 0
+        high = length - 1
+        while low <= high:
+            middle = low + ((high - low) >> 1)
+            if max_v[middle] < num and max_v[middle+1] > num:
+                return middle
+            elif max_v[middle] == num:
+                return -1
+            elif max_v[middle] > num:
+                high = middle - 1
+            else:
+                low = middle + 1
+```
