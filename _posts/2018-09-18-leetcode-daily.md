@@ -271,3 +271,253 @@ class Solution:
 
         return ans
 ```
+
+
+# LeetCode 15: 3Sum
+
+**有些时候，如果列表内元素需要重复访问的话，可以将其赋给变量，这个题把`nums[left]`, `nums[middle]`, `nums[right]`赋给变量比直接使用多打败了20%的提交的人。：）**
+
+```python
+#
+# [15] 3Sum
+#
+# https://leetcode.com/problems/3sum/description/
+#
+# algorithms
+# Medium (22.03%)
+# Total Accepted:    383.4K
+# Total Submissions: 1.7M
+# Testcase Example:  '[-1,0,1,2,-1,-4]'
+#
+# Given an array nums of n integers, are there elements a, b, c in nums such
+# that a + b + c = 0? Find all unique triplets in the array which gives the sum
+# of zero.
+# 
+# Note:
+# 
+# The solution set must not contain duplicate triplets.
+# 
+# Example:
+# 
+# 
+# Given array nums = [-1, 0, 1, 2, -1, -4],
+# 
+# A solution set is:
+# [
+# ⁠ [-1, 0, 1],
+# ⁠ [-1, -1, 2]
+# ]
+# 
+# 
+#
+class Solution:
+    def threeSum(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: List[List[int]]
+        """
+        length, res = len(nums), []
+        
+        if length < 3:
+            return res 
+
+        nums.sort()
+        
+        for left in range(length-2):
+            a = nums[left]
+            if a > 0:
+                break
+            if left > 0 and a == nums[left-1]:
+                continue
+
+            middle = left + 1
+            right = length - 1
+            while middle < right:
+                b, c = nums[middle], nums[right]
+                cur_sum = a + b + c
+                if cur_sum == 0:
+                    res.append([a, b, c])
+                    middle += 1
+                    right -= 1
+                    while middle < right and nums[middle] == nums[middle-1]:
+                        middle += 1
+                    while right > middle and nums[right] == nums[right+1]:
+                        right -= 1
+                elif cur_sum < 0:
+                    middle += 1 
+                else:
+                    right -= 1
+
+        return res
+
+```
+
+
+# LeetCode 21: Merge Two Sorted Lists
+
+*****能用if else区分情况就不要用两个if，会慢。**
+
+```python
+#
+# [21] Merge Two Sorted Lists
+#
+# https://leetcode.com/problems/merge-two-sorted-lists/description/
+#
+# algorithms
+# Easy (42.96%)
+# Total Accepted:    409.2K
+# Total Submissions: 948.5K
+# Testcase Example:  '[1,2,4]\n[1,3,4]'
+#
+# Merge two sorted linked lists and return it as a new list. The new list
+# should be made by splicing together the nodes of the first two lists.
+# 
+# Example:
+# 
+# Input: 1->2->4, 1->3->4
+# Output: 1->1->2->3->4->4
+# 
+# 
+#
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
+
+class Solution:
+    def mergeTwoLists(self, l1, l2):
+        """
+        :type l1: ListNode
+        :type l2: ListNode
+        :rtype: ListNode
+        """
+        if l1 is None:
+            return l2
+        elif l2 is None:
+            return l1
+        
+        if l1.val <= l2.val:
+            head = l1
+            l1 = l1.next
+        else:
+            head = l2
+            l2 = l2.next
+
+        cur = head
+
+        while l1 and l2:
+            if l1.val <= l2.val:
+                cur.next = l1
+                l1 = l1.next
+                cur = cur.next
+            else:
+                cur.next = l2
+                l2 = l2.next
+                cur = cur.next
+
+        while l1:
+            cur.next = l1
+            l1 = l1.next
+            cur = cur.next
+
+        while l2:
+            cur.next = l2
+            l2 = l2.next
+            cur = cur.next
+
+        return head
+
+```
+
+
+# LeetCode 20: Valid Parentheses
+
+```python
+#
+# [20] Valid Parentheses
+#
+# https://leetcode.com/problems/valid-parentheses/description/
+#
+# algorithms
+# Easy (34.54%)
+# Total Accepted:    402.5K
+# Total Submissions: 1.2M
+# Testcase Example:  '"()"'
+#
+# Given a string containing just the characters '(', ')', '{', '}', '[' and
+# ']', determine if the input string is valid.
+# 
+# An input string is valid if:
+# 
+# 
+# Open brackets must be closed by the same type of brackets.
+# Open brackets must be closed in the correct order.
+# 
+# 
+# Note that an empty string is also considered valid.
+# 
+# Example 1:
+# 
+# 
+# Input: "()"
+# Output: true
+# 
+# 
+# Example 2:
+# 
+# 
+# Input: "()[]{}"
+# Output: true
+# 
+# 
+# Example 3:
+# 
+# 
+# Input: "(]"
+# Output: false
+# 
+# 
+# Example 4:
+# 
+# 
+# Input: "([)]"
+# Output: false
+# 
+# 
+# Example 5:
+# 
+# 
+# Input: "{[]}"
+# Output: true
+# 
+# 
+#
+class Solution:
+    def isValid(self, s):
+        """
+        :type s: str
+        :rtype: bool
+        """
+        if not s: 
+            return True 
+        elif len(s) % 2 == 1:
+            return False
+        else:
+            check_dict = {'(':')', '{':'}', '[':']'}
+            stack = []
+            for item in s:
+                if item in check_dict:
+                    stack.append(item)
+                else:
+                    if not stack or check_dict[stack[-1]] != item:
+                        return False
+                    else:
+                        stack.pop()
+
+            return True if not stack else False
+
+```
+
+
+
