@@ -13,6 +13,9 @@ plugins:
 
 markdown: kramdown
 kramdown:
+  syntax_highlighter_opts:
+    block:
+      line_numbers: true 
   auto_id_prefix: 'heading-'
   smart_quotes: ["apos", "apos", "quot", "quot"]
   toc_levels: 1..5
@@ -26,7 +29,7 @@ sass:
 baseurl: 
 title: V
 description: "For man is man and master of his fate."
-keywords: 'jekyll,theme,gem-based,blog'
+keywords: 'jekyll,python,code,blog,algorithm'
 author:
   name: Aaron
   job_title:
