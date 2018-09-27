@@ -24,11 +24,10 @@ sass:
   style: compressed
 
 # Site Data
-url: "https://todebug.com" 
-# the base hostname & protocol for your site, e.g. http://example.com
+url: https://todebug.com 
 baseurl: 
 title: V
-description: "For man is man and master of his fate."
+description: For man is man and master of his fate.
 keywords: 'jekyll,python,code,blog,algorithm'
 author:
   name: Aaron
