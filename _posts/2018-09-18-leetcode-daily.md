@@ -791,3 +791,163 @@ class Solution:
         return ''.join(s)
 
 ```
+
+# LeetCode 9: Palindrome Number [boring question]
+
+```python
+#
+# [9] Palindrome Number
+#
+# https://leetcode.com/problems/palindrome-number/description/
+#
+# algorithms
+# Easy (38.18%)
+# Total Accepted:    399.3K
+# Total Submissions: 1M
+# Testcase Example:  '121'
+#
+# Determine whether an integer is a palindrome. An integer is a palindrome when
+# it reads the same backward as forward.
+# 
+# Example 1:
+# 
+# 
+# Input: 121
+# Output: true
+# 
+# 
+# Example 2:
+# 
+# 
+# Input: -121
+# Output: false
+# Explanation: From left to right, it reads -121. From right to left, it
+# becomes 121-. Therefore it is not a palindrome.
+# 
+# 
+# Example 3:
+# 
+# 
+# Input: 10
+# Output: false
+# Explanation: Reads 01 from right to left. Therefore it is not a palindrome.
+# 
+# 
+# Follow up:
+# 
+# Coud you solve it without converting the integer to a string?
+# 
+#
+class Solution:
+    def isPalindrome(self, x):
+        """
+        :type x: int
+        :rtype: bool
+        """
+        x = list(str(x))
+        low, high = 0, len(x)-1
+        while low < high:
+            if x[low] != x[high]:
+                return False
+            low += 1
+            high -= 1
+        return True
+
+```
+
+# LeetCode 6: ZigZag
+
+**这个题还是挺有意思的，主要是分析以及实现。剑指offer上说的没错，借助几个具体例子，很容易就能摸清一般规律，解法如下：**
+
+![zigzag-leetcode6](http://oq782gkz3.bkt.clouddn.com/zigzag_leetcode6.jpeg)
+
+```python
+#
+# [6] ZigZag Conversion
+#
+# https://leetcode.com/problems/zigzag-conversion/description/
+#
+# algorithms
+# Medium (28.47%)
+# Total Accepted:    239.9K
+# Total Submissions: 838K
+# Testcase Example:  '"PAYPALISHIRING"\n3'
+#
+# The string "PAYPALISHIRING" is written in a zigzag pattern on a given number
+# of rows like this: (you may want to display this pattern in a fixed font for
+# better legibility)
+#
+#
+# P   A   H   N
+# A P L S I I G
+# Y   I   R
+#
+#
+# And then read line by line: "PAHNAPLSIIGYIR"
+#
+# Write the code that will take a string and make this conversion given a
+# number of rows:
+#
+#
+# string convert(string s, int numRows);
+#
+# Example 1:
+#
+#
+# Input: s = "PAYPALISHIRING", numRows = 3
+# Output: "PAHNAPLSIIGYIR"
+#
+#
+# Example 2:
+#
+#
+# Input: s = "PAYPALISHIRING", numRows = 4
+# Output: "PINALSIGYAHRPI"
+# Explanation:
+#
+# P     I    N
+# A   L S  I G
+# Y A   H R
+# P     I
+#
+#
+
+
+class Solution:
+    def convert(self, s, numRows):
+        """
+        :type s: str
+        :type numRows: int
+        :rtype: str
+        """
+        length = len(s)
+        if numRows == 1 or length <= numRows:
+            return s
+
+        res = []
+        for i in range(numRows):
+            # max_delta是打印第一行两个字符串之间的索引距离
+            max_delta = numRows * 2 - 2
+            j = i
+            res.append(s[j])
+            # next_must为当前打印行和第一行竖直对应的元素索引
+            next_must = j + max_delta
+            # next_cur为为斜坡元素
+            next_cur = next_must - 2 * i
+            while next_cur < length:
+                if next_cur != j and next_cur != next_must:
+                    res.append(s[next_cur])
+                if next_must < length:
+                    res.append(s[next_must])
+                j = next_must
+                next_must = j + max_delta
+                next_cur = next_must - i * 2
+
+        return ''.join(res)
+
+
+# if __name__ == "__main__":
+#     s = 'PAYPALISHIRING'
+#     ex = Solution()
+#     print(ex.convert(s, 4))
+```
