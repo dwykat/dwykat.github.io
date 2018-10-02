@@ -7,14 +7,12 @@ tags: [regex]
 redirect_from:
   - /2017/05/17/
 ---
-
----
 > 这是主要参考文献：[正则表达式入门](https://deerchao.net/tutorials/regex/regex.htm)，本文只是做了修改以便于自己记忆。
 
 * Kramdown table of contents
 {:toc .toc}
 * * * * *
-
+![test](/favicon.ico)
 ## 1. 元字符 metacharater
 
 
