@@ -1,18 +1,21 @@
 ---
 layout: post
-tille: "正则表达式入门笔记"
-description: "正则表达式速记手册"
-categories: [Linux]
-tags: [regex]
+title: 正则表达式入门
+guid: bf5a3d7b92444a27999260c196553064
+categories: [Tips]
+tags: [tips, regexp]
 redirect_from:
-  - /2017/05/17/
+    - /2018/05/20/
 ---
-> 这是主要参考文献：[正则表达式入门](https://deerchao.net/tutorials/regex/regex.htm)，本文只是做了修改以便于自己记忆。
 
+**目录：**
 * Kramdown table of contents
 {:toc .toc}
-* * * * *
-![test](/favicon.ico)
+* * * 
+
+
+> 这是主要参考文献：[正则表达式入门](https://deerchao.net/tutorials/regex/regex.htm)，本文只是做了修改以便于自己记忆。
+
 ## 1. 元字符 metacharater
 
 
