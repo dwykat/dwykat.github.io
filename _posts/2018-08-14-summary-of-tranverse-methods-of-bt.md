@@ -202,8 +202,8 @@ class Traverse():
         print('')
 ```
 后来对单栈后序遍历做了一些小总结：
-![post traversal part1](http://oq782gkz3.bkt.clouddn.com/post_traversal1.jpeg)
-![post traversal part2](http://oq782gkz3.bkt.clouddn.com/post_traversal2.jpeg)
+![post traversal part1](/assets/blog_images/post_traversal1.jpeg)
+![post traversal part2](/assets/blog_images/post_traversal2.jpeg)
 
 代码：
 

@@ -14,12 +14,12 @@ redirect_from:
 
 **先给出最终成果图:**
 
-![clean workspace screenshot](http://oq782gkz3.bkt.clouddn.com/IV_001.bmp)
+![clean workspace screenshot](/assets/blog_images/i3_wm_desktop1.bmp)
 
 在i3下使用多显示器首先就是要知道你各个显示器的名字，直接执行`xrandr`命令就能得到每一个视频接口输出的信息。
 
 
-![显示器名](http://oq782gkz3.bkt.clouddn.com/Selection_016.png)
+![显示器名](/assets/blog_images/i3_wm_monitor_names.png)
 
 但首先就是要确定你想如何排布你的显示器,具体可以参考我的布局。
 
@@ -33,13 +33,13 @@ redirect_from:
 
 `--output` 后跟显示器名，`--pos` 后面跟显示器左上角的坐标。比如我的显示器排布方式的坐标就如下图：
 
-![坐标图](http://oq782gkz3.bkt.clouddn.com/2017-08-21%2019.06.16-1_1.jpg)
+![坐标图](/assets/blog_images/i3_wm.jpg)
 
 我标注的两个坐标点即为`--pos`参数应该取的值。
 
 **第二种**是利用`arandr`，`arandr`是一个图形化的`xrandr`客户端，界面如下：
 
-![arandr界面](http://oq782gkz3.bkt.clouddn.com/Selection_017.png)
+![arandr界面](/assets/blog_images/i3_wm_arandr_gui.png)
 
 界面显示的就是我自己的显示器布局，因为`arandr`执行之后，重启i3界面设置会失效，
 所以需要讲`xrandr`设置写入到i3配置里。具体配置可以从`arandr`导出，导出方式: `layout - save as - nameyouset.sh`，

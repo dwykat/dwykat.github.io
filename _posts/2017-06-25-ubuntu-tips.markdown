@@ -46,7 +46,7 @@ Ubuntu 16.04自带了python2.7和python3.5，且默认版本为python2.7，最�
 
 此时python3.5已经成为默认。
 
-![效果](http://oq782gkz3.bkt.clouddn.com/Selection_008.png)
+![效果](/assets/blog_images/python35.png)
 
 **然后此时需要注意的就是，如果以后主要在3.×的环境下工作，请安装对应3.×的包。**
 

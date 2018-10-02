@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "How to use pip to upgrade all outdated packages at one time"
+title: "使用pip一定更新所有包"
 categories: [Python]
 tags: [pip]
 redirect_from:

@@ -59,7 +59,7 @@ Done!
 
 文件名乱码如下所示：
 
-![乱码](http://oq782gkz3.bkt.clouddn.com/Selection_003.png)
+![乱码](/assets/blog_images/decode_error.png)
 
 **解决方法为：**
 
@@ -67,7 +67,7 @@ Done!
 
 效果如下：
 
-![效果](http://oq782gkz3.bkt.clouddn.com/Selection_004.png)
+![效果](/assets/blog_images/decode_fixed.png)
 
 可以看出中文已经正确显示了。
 

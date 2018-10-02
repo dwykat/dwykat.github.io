@@ -127,7 +127,7 @@ class Solution:
 
 # LeetCode 28: Implement strStr()
 **KMP算法**
-![KMP](http://oq782gkz3.bkt.clouddn.com/kmp.JPG)
+![KMP](/assets/blog_images/kmp.jpeg)
 
 
 
@@ -673,7 +673,7 @@ class Solution:
 
 # LeetCode 5: Longest Palindromic Substring
 
-![manacher](http://oq782gkz3.bkt.clouddn.com/manacher.JPG)
+![manacher](/assets/blog_images/manacher.jpeg)
 
 ```python
 #
@@ -859,7 +859,7 @@ class Solution:
 
 **这个题还是挺有意思的，主要是分析以及实现。剑指offer上说的没错，借助几个具体例子，很容易就能摸清一般规律，解法如下：**
 
-![zigzag-leetcode6](http://oq782gkz3.bkt.clouddn.com/zigzag_leetcode6.jpeg)
+![zigzag-leetcode6](/assets/blog_images/zigzag_leetcode6.jpeg)
 
 ```python
 #

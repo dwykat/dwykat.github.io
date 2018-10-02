@@ -136,7 +136,7 @@ colorscheme molokai
 
 **最终效果**
 
-![vim screenshot](http://oq782gkz3.bkt.clouddn.com/Screenshot%20from%202017-11-17%2015-25-45.png)
+![vim screenshot](/assets/blog_images/vim_done.png)
 
 ---
 

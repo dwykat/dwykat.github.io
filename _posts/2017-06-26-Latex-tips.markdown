@@ -18,8 +18,8 @@ tag: [latex, tips]
 ```
 对应的显示效果如下：
 
-![\min\limits\_{a}](http://oq782gkz3.bkt.clouddn.com/4.png)
-![\min\nolimits\_{a}](http://oq782gkz3.bkt.clouddn.com/5.png)
+![\min\limits_{a}](/assets/blog_images/latex_min_1.png)
+![\min\nolimits{a}](/assets/blog_images/latex_min_2.png)
 
 ---
 

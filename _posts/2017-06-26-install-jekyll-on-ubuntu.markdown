@@ -15,7 +15,7 @@ sudo apt install ruby-full ruby-bundler
 ```
 **这里如果下意识的使用`sudo apt install ruby`安装ruby会导致下一步安装jekyll的时候出现如下错误：**
 
-![gem\_install\_error](http://oq782gkz3.bkt.clouddn.com/gem_install_jekyll_errors.png)
+![gem install error](/assets/blog_images/gem_install_jekyll_errors.png)
 
 2.安装jekyll
 

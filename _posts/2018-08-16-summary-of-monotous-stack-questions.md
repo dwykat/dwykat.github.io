@@ -79,11 +79,10 @@ def monotone_stack(arr):
 分析：<br>
 > 单调栈相关的问题，有些时候就好像在拿着一把竖直的尺子从中间往两边扩，扩到规则限定的边界。比如在题1中就是扩到两边离它最近的比它小的值所在的地方。对于这个题，如果我们把结果要的小矩形的数量，转换为矩形的面积。那么就可以做到如下图的转化：
 
-![矩阵转化图](http://oq782gkz3.bkt.clouddn.com/get_max_submatrix)
+![矩阵转化图](/assets/blog_images/get_max_submatrix.jpeg)
 
 > 那么把以每一行为底得到的数组看做一个直方图数组，我们就可以利用单调栈求得每个直方图数组上能联通的最大矩形面积。大概过程如下：
 
-![简单过程](http://oq782gkz3.bkt.clouddn.com/IMG_242DC3F74D9B-1.jpeg)
 
 #### 代码： {#q2-code}
 ```python

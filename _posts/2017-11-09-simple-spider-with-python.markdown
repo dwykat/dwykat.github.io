@@ -17,7 +17,7 @@ redirect_from:
 
 此爬虫简单到不能再简单了，主要内容就是爬取豆瓣top250电影页面的内容，然后将该内容导入了数据库。下面先上结果图：
 
-![mysql_spider](http://oq782gkz3.bkt.clouddn.com/2017-11-09%2016_54_38-movie%20@spider%20%28spider%29%20-%20%E8%A1%A8%20-%20Navicat%20for%20MySQL.png)
+![mysql_spider](/assets/blog_images/spider_movie_sql.png)
 
 ## 爬虫部分代码：
 
