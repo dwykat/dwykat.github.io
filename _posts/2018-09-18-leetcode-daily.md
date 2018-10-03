@@ -127,7 +127,7 @@ class Solution:
 
 # LeetCode 28: Implement strStr()
 **KMP算法**
-![KMP](/assets/blog_images/kmp.jpeg)
+![KMP](http://oq782gkz3.bkt.clouddn.com/kmp.JPG)
 
 
 
@@ -673,7 +673,7 @@ class Solution:
 
 # LeetCode 5: Longest Palindromic Substring
 
-![manacher](/assets/blog_images/manacher.jpeg)
+![manacher](http://oq782gkz3.bkt.clouddn.com/manacher.JPG)
 
 ```python
 #
@@ -859,7 +859,7 @@ class Solution:
 
 **这个题还是挺有意思的，主要是分析以及实现。剑指offer上说的没错，借助几个具体例子，很容易就能摸清一般规律，解法如下：**
 
-![zigzag-leetcode6](/assets/blog_images/zigzag_leetcode6.jpeg)
+![zigzag-leetcode6](http://oq782gkz3.bkt.clouddn.com/zigzag_leetcode6.jpeg)
 
 ```python
 #
@@ -1086,3 +1086,97 @@ class Solution:
 #     ex = Solution()
 #     print(ex.myAtoi(string))
 ```
+
+# LeetCode 10: Regular Expression Matching [hard]
+**这个题是剑指offer原题，在解剑指offer中，使用的解法是暴力递归，这个解法在leetcode是通不过的，同时看了LeetCode上的Solution之后，我真的有点儿方了。上面的Python解法写的无比精炼，简直是优美，下面上一下同样的暴力递归思路的比较：**
+
+```python
+class Solution:
+    # s, pattern都是字符串
+    def match(self, s, pattern):
+        if len(s) == 0 and len(pattern) == 0:
+            return True
+        # 如果s长度不为0，而pattern长度为0，这种情况不可能匹配成功
+        elif len(s) != 0 and len(pattern) == 0:
+            return False
+        # 如果s长度为0， 而pattern长度不为0，那么可能会有pattern为'（.*）*'的情况
+        elif len(s) == 0 and len(pattern) != 0:
+            # 如果pattern第二位为0, pattern推进两个
+            if len(pattern) > 1 and pattern[1] == '*':
+                return self.match(s, pattern[2:])
+            else:
+                return False
+        # 如果s和pattern长度都不为0
+        else:
+            # pattern第二位为*
+            if len(pattern) > 1 and pattern[1] == '*':
+                # 如果s[0] != pattern[0]
+                if s[0] !=  pattern[0] and pattern[0] != '.':
+                    return self.match(s, pattern[2:])
+                # 如果s[0] == pattern[0], 那么有三种情况
+                    # 1. s不变，pattern后移两步（pattern前两个字符等价于空）
+                    # 2. s右移一个， pattern右移两个 （pattern前两个字符等价于一个字符）
+                    # 3. s右移一个， pattern不右移 （pattern前两个字符等价于多个字符)）
+                else:
+                    return self.match(s, pattern[2:]) or \
+                           self.match(s[1:], pattern[2:]) or \
+                           self.match(s[1:], pattern)
+            # pattern第二位不是*
+            else:
+                # 比较第一位的情况
+                if s[0] == pattern[0] or pattern[0] == '.':
+                    return self.match(s[1:], pattern[1:])
+                else:
+                    return False
+```
+
+LeetCode示范解法：
+
+```python
+class Solution(object):
+    def isMatch(self, text, pattern):
+        if not pattern:
+            return not text
+
+        first_match = bool(text) and pattern[0] in {text[0], '.'}
+
+        if len(pattern) >= 2 and pattern[1] == '*':
+            return (self.isMatch(text, pattern[2:]) or
+                    first_match and self.isMatch(text[1:], pattern))
+        else:
+            return first_match and self.isMatch(text[1:], pattern[1:])
+```
+
+加一点对于LeetCode标准解的解释：
+
+首先如果是匹配pattern中没有`*`字符，那么匹配过程就可以简化成：
+```python
+def match(text, pattern):
+    if not pattern: return not text
+    first_match = bool(text) and pattern[0] in {text[0], '.'}
+    return first_match and match(text[1:], pattern[1:])
+```
+对应于解法中的else情况，那么如果匹配pattern中有`*`字符，且是解法中的if情况，那么不管pattern[0]是否匹配，我们都需要看`*`代表前面字符出现0次时候的情况；另外，如果第一个字符是匹配的，那么我们还要看`*`匹配1次或多次的情况。
+
+暴力递归的解法是通不过LeetCode测试的，此时为了加快速度我们可以用functools里的lru_cache来保存暴力递归中间值；同样也可以把暴力递归版本改成动态规划版本，相对来说使用lru__cache更省力。
+
+使用lru__cache只需加入两行代码，代码就不贴了。
+
+动态规划版本:
+```python
+class Solution(object):
+    def isMatch(self, text, pattern):
+        dp = [[False] * (len(pattern) + 1) for _ in range(len(text) + 1)]
+
+        dp[-1][-1] = True
+        for i in range(len(text), -1, -1):
+            for j in range(len(pattern) - 1, -1, -1):
+                first_match = i < len(text) and pattern[j] in {text[i], '.'}
+                if j+1 < len(pattern) and pattern[j+1] == '*':
+                    dp[i][j] = dp[i][j+2] or first_match and dp[i+1][j]
+                else:
+                    dp[i][j] = first_match and dp[i+1][j+1]
+
+        return dp[0][0]
+```
+

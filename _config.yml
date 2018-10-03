@@ -61,7 +61,7 @@ blog:
 disqus:
   shortname: todebug
   public_key: 8ayEhSuQZP6P8nuIUTKmI99NFEOuI6idwr26SUF6lIpwzcxfpZh5zCTb4PSmCWXe
-google_analytics: 'UA-100095499-1'
+google_analytics: 'UA-100095499-2'
 addthis_public_id: 'ra-5bafb28d006eb0be'
 
 paths:
