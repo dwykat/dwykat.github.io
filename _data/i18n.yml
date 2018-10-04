@@ -4,7 +4,7 @@ en: &en
   back_to_top: 'Back to Top'
   categories: 'Categories'
   close: 'Close'
-  copyright: '<p><small><a href="http://www.miitbeian.gov.cn" target="_blank">京ICP备18028496号-2</a>, powered by <a href="https://jekyllrb.com/" target="_blank">Jekyll</a>, &copy; 2017 Aaron.</small></p>'
+  copyright: '<p><small> powered by <a href="https://jekyllrb.com/" target="_blank">Jekyll</a>, &copy; 2017 Aaron.</small></p>'
   enter_blog: 'Enter Blog'
   last_updated: 'Last updated'
   menu: 'Menu'
