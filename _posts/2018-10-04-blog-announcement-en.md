@@ -13,8 +13,8 @@ redirect_from:
 {:toc .toc}
 * * * 
 
-# Blog addr migration nnotification
+# Blog addr migration notification
 
-For some personal reasons, plus I have deployed a blog on a personal server, I will suspend this github pages blog for now. This blog will be used to store the blog theme in the future.
+For some personal reasons, plus I have deployed the blog on my personal server, I will suspend this github pages blog for now. This blog will be used to store the blog theme in the future.
 
-You can find me [here.](https://todebug.com)
+You can find me [here.](https://todebug.com/blog/)

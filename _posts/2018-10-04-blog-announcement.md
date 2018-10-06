@@ -12,4 +12,4 @@ redirect_from:
 # 博客迁移通知
 由于博客越来越多，外加自己已经在服务器独立部署了，所以github pages博客就先暂停了。只留下一个主题，喜欢的人可以继续fork。
 
-[新博客地址](https://todebug.com)
+[新博客地址](https://todebug.com/blog/)
