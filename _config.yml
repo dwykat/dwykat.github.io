@@ -26,14 +26,14 @@ sass:
 # Site Data
   url: https://dwykat.github.io
 baseurl: 
-title: V
-description: For man is man and master of his fate.
+title: Mission
+description: Where there is a will, there is a way.
 keywords: 'jekyll,python,code,blog,algorithm'
 author:
   name: Learner
   job_title:
   location:
-  email: email@email.com
+  email: brucecser@foxmail.com
   social_links:
     - name: facebook
       url:
@@ -50,13 +50,13 @@ author:
     - name: vk
       url:
 home:
-  section1: <h1>V</h1>
-  section2: <h2>For man is man and master of his fate.</h2>
+  section1: <h1>Mission</h1>
+  section2: <h2>Where there is a will, there is a way.</h2>
   section3: <div class="social-links"><a class="ico-github btn" href="https://github.com/dwykat/dwykat.github.io" title="View on GitHub"></a></div>
 blog:
   cc_license:  http://creativecommons.org/licenses/by-sa/4.0/
   cc_license_image: /assets/images/theme/cc-by-sa.png
-  footer_content: For man is man and master of his fate.
+  footer_content: Where there is a will, there is a way.
 
 disqus:
   shortname: 
