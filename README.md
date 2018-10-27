@@ -1,7 +1,7 @@
 # **Thanks for [the creator](http://yizeng.me) of this theme!** 
 
 
-**Preview：** You can visit [my blog](https://todebug.com)
+**Preview：** You can visit [my blog](https://dwykat.github.io)
 * * * 
 
 ## 主页(个人介绍,或者博客介绍)
