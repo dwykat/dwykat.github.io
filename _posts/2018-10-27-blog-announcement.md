@@ -9,7 +9,7 @@ redirect_from:
 ---
 
 
-# 博客迁移通知
+# 我的第一个博客
 哈哈
 
-[新博客地址](https://www.baidu.com)
+[万能地址](https://www.baidu.com)
