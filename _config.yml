@@ -24,13 +24,13 @@ sass:
   style: compressed
 
 # Site Data
-  url: https://bryceyang.github.io
+  url: https://dwykat.github.io
 baseurl: 
 title: V
 description: For man is man and master of his fate.
 keywords: 'jekyll,python,code,blog,algorithm'
 author:
-  name: Aaron
+  name: Learner
   job_title:
   location:
   email: email@email.com
@@ -38,7 +38,7 @@ author:
     - name: facebook
       url:
     - name: github
-      url: https://github.com/bryceyang
+      url: https://github.com/dwykat
     - name: instagram
       url:
     - name: linkedin
@@ -52,7 +52,7 @@ author:
 home:
   section1: <h1>V</h1>
   section2: <h2>For man is man and master of his fate.</h2>
-  section3: <div class="social-links"><a class="ico-github btn" href="https://github.com/bryceyang/bryceyang.github.io" title="View on GitHub"></a></div>
+  section3: <div class="social-links"><a class="ico-github btn" href="https://github.com/dwykat/dwykat.github.io" title="View on GitHub"></a></div>
 blog:
   cc_license:  http://creativecommons.org/licenses/by-sa/4.0/
   cc_license_image: /assets/images/theme/cc-by-sa.png
