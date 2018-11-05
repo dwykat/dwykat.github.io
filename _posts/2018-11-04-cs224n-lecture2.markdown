@@ -43,7 +43,7 @@ $$ J(\theta)=\prod_{t=1}^T\prod_{-m \leq j \leq m \atop j \neq 0}P(w_{t+j}\ |\ w
 
 $$ J(\theta)=-\frac{1}{T}\sum_{t=1}^T\sum_{-m \leq j \leq m \atop j \neq 0}\log(P(w_{t+j}\ |\ w_t)) $$
 
-可见，模型的关键是求出$P(w_{t+j}|w_t)$，我们要根据center word去预测out words(context words)，可以对输出层的输出结果做softmax操作，得到一个归一化的，概率性的结果，只要让out words的概率值最大就好。这样就得出了word2vec中对$P(w_{t+j}|w_t)$ 即P(o|c)的定义。
+可见，模型的关键是求出 $P(w_{t+j}|w_t)$ ，我们要根据center word去预测out words(context words)，可以对输出层的输出结果做softmax操作，得到一个归一化的，概率性的结果，只要让out words的概率值最大就好。这样就得出了word2vec中对 $P(w_{t+j}|w_t)$  即 $P(o|c)$ 的定义。
 
 ![softmax]({{ site.url }}/assets/images/lecture2/softmax.jpg)
 
