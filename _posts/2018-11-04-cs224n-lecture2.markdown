@@ -52,7 +52,8 @@ $$ J(\theta)=-\frac{1}{T}\sum_{t=1}^T\sum_{-m \leq j \leq m \atop j \neq 0}\log(
 ![process]({{ site.url }}/assets/images/lecture2/process.jpg)
 
 # 4. 梯度计算
-> 有时间自己推一下，后续补充
+
+![tuidao]({{ site.url }}/assets/images/lecture2/tuidao.jpg)
 
 # 5. Trick
 这节课只是简单地讲了Skip-Gram的原理，对于word2vec的一些trick并未介绍。在这里简单记录一下。
