@@ -98,7 +98,7 @@ Extrinsic：通过对外部实际应用的效果提升来体现。耗时较长�
 
   可视化结果：
 
-  ![visualization]({{ site.url }}/assets/images/cs224n/lecture3/visualization.jpg)
+  ![visualization]({{ site.url }}/assets/images/cs224n/lecture3/visual.jpg)
 
 # 5. 总结
 
