@@ -1,6 +1,6 @@
 ---
 layout: "post"
-title: "cs224n lecture 2: word2vec note"
+title: "cs224n lecture 2 note：word vectors"
 categories: [cs224n]
 tags: [notes]
 date: "2018-11-04 19:33"

@@ -1,6 +1,6 @@
 ---
 layout: "post"
-title: "cs224n lecture 1 note"
+title: "cs224n lecture 1 note: introduction"
 categories: [cs224n]
 tags: [notes]
 date: "2018-10-28 20:00"
