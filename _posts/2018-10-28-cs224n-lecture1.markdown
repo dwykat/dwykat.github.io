@@ -8,7 +8,7 @@ date: "2018-10-28 20:00"
 # 1. What is NLP?
 自然语言处理是计算机科学、人工智能和语言学的交叉领域，旨在让计算机能够“理解”或处理自然语言，而重点就是计算机对自然语言的处理，这就延伸出了很多应用。
 
-![NLP层次]({{ site.url }}/assets/images/lecture1/nlp levels procedure.jpg)
+![NLP层次]({{ site.url }}/assets/images/cs224n/lecture1/nlp levels procedure.jpg)
 
 这是NLP涉及到的几个层次，可以看到输入包括语音和文本。第一级是语音识别和OCR或分词；
 第二级是形态学分析，是从语音内部特征，词的内部结构等方面进行分析；接下来就是课程的
@@ -29,7 +29,7 @@ date: "2018-10-28 20:00"
 似乎是大脑神经元在接收的连续的声光学信号下的激活。再加上词表的稀疏性，这就给人启发，是不是针对如此特殊的
 人类语言，应该用连续的符号来处理。
 
-![语言信号]({{ site.url }}/assets/images/lecture1/signal.jpg)
+![语言信号]({{ site.url }}/assets/images/cs224n/lecture1/signal.jpg)
 
 # 3. What's Deep Learning?
 深度学习是机器学习的子集，与传统机器学习不同的是，深度学习通过复杂的网络结构，
@@ -37,11 +37,11 @@ date: "2018-10-28 20:00"
 相同点都是在得到特征后的分析和处理。
 可以看到，后者完全取决于人的领域学习，机器只是在做数值优化。
 
-![传统机器学习]({{ site.url }}/assets/images/lecture1/traditional machine learning.jpg)
+![传统机器学习]({{ site.url }}/assets/images/cs224n/lecture1/traditional machine learning.jpg)
 
 深度学习是通过深度网络自动学习输入的多层特征表示。
 
-![深度学习]({{ site.url }}/assets/images/lecture1/deep learning.jpg)
+![深度学习]({{ site.url }}/assets/images/cs224n/lecture1/deep learning.jpg)
 
 # 4. Reasons for Exploring Deep Learning
 这一部分简单讲了深度学习的历史和正在腾飞的应用实例。这本身没什么可记录的，可是当我们现在在用lstm, cnn等网络的时候，会惊奇的发现，这都是上世纪八九十年代的产物。神经网络产生于上世纪六十年代，由于应用的局限和玄学的可解释性，一直没有被重视，谁又能想到现如今，随着数据的聚集，高性能计算器的发展，深度学习正在以神奇的方式改变着人工智能发展的格局。
