@@ -48,40 +48,6 @@ layout: blog
                     </div>
                 </div>
             </div>
-            <!--
-            <div id="gitmentContainer"></div>
-            <link rel="stylesheet" href="https://jjeejj.github.io/css/gitment.css">
-            <script src="https://jjeejj.github.io/js/gitment.js"></script>
-            <script src="/_layouts/md5.min.js"></script>
-            <script>
-            var gitment = new Gitment({
-                owner: 'dwykat',
-                repo: 'comment',
-                oauth: {
-                    client_id: 'c3cbbdbeab8c7cac6ba1',
-                    client_secret: '2bd0bc1fc6cc8cd1fe7f5c1e2f6466e7588db525',
-                },
-            });
-            gitment.render('gitmentContainer');
-            </script>
-            --!>
-            <!-- 引入Gitalk评论插件  -->
-            <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
-            <script src="https://unpkg.com/gitalk@latest/dist/gitalk.min.js"></script>
-            <script src="/_layouts/md5.min.js"></script>
-            <div id="gitalk-container"></div>
-            <script type="text/javascript">
-                var gitalk = new Gitalk({
-                clientID: 'c3cbbdbeab8c7cac6ba1',
-                clientSecret: '2bd0bc1fc6cc8cd1fe7f5c1e2f6466e7588db525',
-                repo: 'comment',
-                owner: 'dwykat',
-                admin: ['dwykat'],
-                distractionFreeMode: true,
-                id: md5(window.location.pathname),
-                });
-                gitalk.render('gitalk-container');
-            </script>
             <footer class="unit-foot">
                 <div class="unit-inner unit-foot-inner">
                     <div class="post-buttons">
@@ -99,6 +65,40 @@ layout: blog
                         {% endif %}
                     </nav>
                 </div>
+                <!--
+                <div id="gitmentContainer"></div>
+                <link rel="stylesheet" href="https://jjeejj.github.io/css/gitment.css">
+                <script src="https://jjeejj.github.io/js/gitment.js"></script>
+                <script src="/_layouts/md5.min.js"></script>
+                <script>
+                var gitment = new Gitment({
+                    owner: 'dwykat',
+                    repo: 'comment',
+                    id: md5(window.location.pathname),
+                    oauth: {
+                        client_id: 'c3cbbdbeab8c7cac6ba1',
+                        client_secret: '2bd0bc1fc6cc8cd1fe7f5c1e2f6466e7588db525',
+                    },
+                });
+                gitment.render('gitmentContainer');
+                </script>
+                -->
+                <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+                <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+                <script src="{{ site.baseurl }}/_layouts/md5.min.js"></script>
+                <div id="gitalk-container"></div>
+                <script type="text/javascript">
+                    var gitalk = new Gitalk({
+                    clientID: 'c3cbbdbeab8c7cac6ba1',
+                    clientSecret: '2bd0bc1fc6cc8cd1fe7f5c1e2f6466e7588db525',
+                    repo: 'comment',
+                    owner: 'dwykat',
+                    admin: ['dwykat'],
+                    distractionFreeMode: true,
+                    id: location.pathname,
+                    });
+                    gitalk.render('gitalk-container');
+                </script>
             </footer>
             <div class="misc-content">
                 {% if site.disqus.shortname and page.comments != false %}
