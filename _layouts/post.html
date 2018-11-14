@@ -48,6 +48,20 @@ layout: blog
                     </div>
                 </div>
             </div>
+            <div id="gitmentContainer"></div>
+            <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+            <script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+            <script>
+            var gitment = new Gitment({
+                owner: 'dwykat',
+                repo: 'dwykat.github.io',
+                oauth: {
+                    client_id: 'c3cbbdbeab8c7cac6ba1',
+                    client_secret: '2bd0bc1fc6cc8cd1fe7f5c1e2f6466e7588db525',
+                },
+            });
+            gitment.render('gitmentContainer');
+            </script>
             <footer class="unit-foot">
                 <div class="unit-inner unit-foot-inner">
                     <div class="post-buttons">
