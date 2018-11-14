@@ -57,7 +57,8 @@ blog:
   cc_license:  http://creativecommons.org/licenses/by-sa/4.0/
   cc_license_image: /assets/images/theme/cc-by-sa.png
   footer_content: Where there is a will, there is a way.
-
+  
+    
 disqus:
   shortname: 
   public_key: 
