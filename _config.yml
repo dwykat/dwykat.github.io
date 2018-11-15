@@ -64,6 +64,11 @@ disqus:
 google_analytics:
 addthis_public_id:
 
+leancloud:
+  enable: true
+  app_id: ECNUyYfDbGndjovmYl5lKkBs-gzGzoHsz
+  app_key: kNpGehA2AioOkUnpQBKtk9Vi
+
 paths:
   home: /
   blog: /blog/
