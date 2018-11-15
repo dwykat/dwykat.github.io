@@ -33,6 +33,13 @@ layout: blog
                                 ({{ site.data.i18n[site.lang].last_updated}}:
                                 <time class="date-updated updated" title="{{ page.last_updated | date_to_xmlschema }}" datetime="{{ page.last_updated | date_to_xmlschema }}">{{ page.last_updated }}</time>)
                             {% endif %}
+                            {% if site.leancloud.enable %}
+                            <span id="{{ page.url }}" class="leancloud_visitors" data-flag-title="{{ page.title }}">
+                              <span class="post-meta-divider">|</span>
+                              <span class="post-meta-item-text"> Hits:  </span>
+                              <span class="leancloud-visitors-count"></span>
+                            </span>
+                            {% endif %}
                         </p>
                         <ul class="list-category list-linear">
                             <li class="list-head">{{ site.data.i18n[site.lang].categories }}: </li>
