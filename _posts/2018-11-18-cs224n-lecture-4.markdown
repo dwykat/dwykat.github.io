@@ -55,7 +55,7 @@ $$-\sum_{i = 1}^N\log \bigg(\frac{\exp(W_{k{(i)}\cdot}x^{(i)})}{\sum_{c=1}^C\exp
 
 ![bound]({{ site.url }}/assets/images/cs224n/lecture4/bound.jpg)
 
-###反向传播
+### 反向传播
 
 纯数学微分推导，和下节一起手写记录，值得注意的是每个结点都有激活函数，求导时不可忽略，这也在一定程度上决定了反向传播过程中间数据的复用性。
 
