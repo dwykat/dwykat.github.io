@@ -1,0 +1,46 @@
+---
+layout: "post"
+title: "cs224n lecture 7 note: tensorflow"
+categories: [cs224n]
+tags: [notes]
+date: "2018-12-16 15:50"
+---
+# 1. 前言
+
+这节课简单地介绍了深度学习框架tensorflow，讲得很基础，我就记录一下我自身学习tensorflow的感想吧。
+
+# 2. 比较
+
+众所周知，有很多深度学习框架，比如，tensorflow, pytorch, keras等等。就使用率而言，tensorflow可以说是世界第一，但是据统计，在国内pytorch有着和tensorflow相当的地位。我简单地学过pytorch和keras，直观上的感觉是，可以和普通python代码无缝衔接，但模型或函数封装的比较好，而tensorflow会构建一个图，在图内很多python命令就不能用了，像if, for循环(for对tensor操作)就不能使用了，想输出tensor变量值，也得先run，初学会感觉不好上手，但是熟悉之后会觉得很舒服，因为自己可以在图里随心所欲地操作，实现模型，不仅仅是调用嘛，还需要做细节设计，这方面我觉得tensorflow就很有优势，这也是我喜欢使用它的原因。
+
+# 3. 难点
+
+我在使用中遇到的难点主要有两个：**debug** 和 **细节操作**。
+
+### debug
+对于这个我没有什么好方法，好像有专门在tf里debug的方法，没有去学。自己的做法如下所示：
+* __输出中间变量的shape__。这往往解决不了问题，除非显式定义过某维度的shape，不然输出的就是'?'。
+* __借助ipython__。将可疑操作的代码在ipython里实现，寻找问题。这个能解决很大比例的问题，就是麻烦了一些。
+* __求助stackoverflow__。这对于复杂一些的问题是很有效的，网上大神很多。
+
+### 细节操作
+前面提到，如果循环计数变量是tensor，就不可以用for或where了。感觉这个问题，带给了我解开大门的钥匙，对tensorflow的使用可以上升一个台阶。要循环不难，用tf.while_loop，但如果要实现我当时的需求，还需要对tensor矩阵细节操作，就这样我接触到了TensorArray，可以在tensor与array类型互相转换，很多功能就都随之可以实现了。可能存在更好的方法，不过这很实用地解决了很多问题。
+
+### tips
+tensorflow构建的graph，只要定义就会运行到，且没有利用短路原则，在做条件判断的时候要特别注意。
+
+# 4. 变量共享知识点
+这是很容易混淆的一个点，在此记录一下。
+
+* tf.name_scope
+
+  主要与tf.Variable()搭配使用，作命名前缀，实现变量共享或命名区分。不对tf.get_variable()起作用。
+
+* tf.variable_scope
+
+  主要与tf.get_variable()搭配使用，作命名前缀，实现变量共享或命名区分。同时，也对tf.Variable()起作用。
+
+可以看出，用tf.get_variable()时要注意scope的使用。
+
+# 5. 总结
+这节比较简单，就不拘泥于课程的内容，记录了自己的一些心得体会，加深印象的同时，希望对大家也有所帮助。
