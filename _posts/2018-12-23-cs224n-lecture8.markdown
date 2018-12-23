@@ -56,6 +56,7 @@ $$\begin{align}
 \end{align}$$
 
 而对于 $\frac{\partial h_t}{\partial h_k}$，有：
+
 $$\frac{\partial h_t}{\partial h_k} = \prod_{j=k+1}^{t}\frac{\partial h_j}{\partial h_{j-1}} = \prod_{j=k+1}^{t}W^T \times diag [f'(j_{j-1})]$$
 
 所以，
@@ -69,6 +70,7 @@ $$\parallel\frac{\partial h_j}{\partial h_{j-1}} \parallel \leq \parallel W^T\pa
 其中 $\beta_W, \beta_h$分别是矩阵和向量的L2范式。
 
 那么，
+
 $$\parallel \dfrac{\partial h_t}{\partial h_k} \parallel = \parallel \prod_{j=k+1}^{t} \dfrac{\partial h_j}{\partial h_{j-1}}\parallel \leq (\beta_W \beta_h)^{t-k}$$
 
 显然，若 $\beta_W\beta_h$显著地大于或小于1的时候，经过足够多的t-k次乘法之后就会趋近于0或者无穷大。小于1更常见，会导致很长时间之前的词语无法对当前的预测产生影响。
